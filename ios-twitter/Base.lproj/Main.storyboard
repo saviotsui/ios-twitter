@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ios_twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login.png" translatesAutoresizingMaskIntoConstraints="NO" id="vUt-Lr-rki"/>
+                            <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0aH-nv-CHV" userLabel="Overlay">
+                                <color key="backgroundColor" red="0.19731622409999999" green="0.19731622409999999" blue="0.19731622409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter-circle-transparent.png" translatesAutoresizingMaskIntoConstraints="NO" id="sKn-xC-FxT">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="oKs-lt-yZv"/>
+                                    <constraint firstAttribute="width" constant="64" id="qyW-WA-aZ3"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="twitter-bird-transparent.png" translatesAutoresizingMaskIntoConstraints="NO" id="WTE-fd-I6F">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="Vbc-4x-KQ4"/>
+                                    <constraint firstAttribute="width" constant="64" id="jRT-gL-qXN"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFr-HI-1TS" userLabel="Separator">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="ITF-c9-8mr"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DVP-RZ-6da">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VuR-E3-Gxe">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQj-pb-aEN">
+                                <color key="backgroundColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Sign in">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DVP-RZ-6da" firstAttribute="top" secondItem="WTE-fd-I6F" secondAttribute="bottom" constant="76" id="29L-l8-jXg"/>
+                            <constraint firstItem="VFr-HI-1TS" firstAttribute="top" secondItem="DVP-RZ-6da" secondAttribute="bottom" constant="14" id="5u9-0f-uLh"/>
+                            <constraint firstItem="VFr-HI-1TS" firstAttribute="centerX" secondItem="VuR-E3-Gxe" secondAttribute="centerX" id="7Yb-di-wu7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XQj-pb-aEN" secondAttribute="bottom" constant="155" id="97P-1C-ZIh"/>
+                            <constraint firstAttribute="trailing" secondItem="XQj-pb-aEN" secondAttribute="trailing" constant="55" id="LfK-gd-EpK"/>
+                            <constraint firstItem="VuR-E3-Gxe" firstAttribute="top" secondItem="VFr-HI-1TS" secondAttribute="bottom" constant="14" id="NQ0-WO-IuS"/>
+                            <constraint firstItem="VuR-E3-Gxe" firstAttribute="leading" secondItem="XQj-pb-aEN" secondAttribute="leading" id="Nx4-s2-RgN"/>
+                            <constraint firstItem="VFr-HI-1TS" firstAttribute="width" secondItem="VuR-E3-Gxe" secondAttribute="width" id="Oxt-Cy-ng2"/>
+                            <constraint firstItem="WTE-fd-I6F" firstAttribute="top" secondItem="sKn-xC-FxT" secondAttribute="bottom" constant="-61" id="PXd-jz-OO4"/>
+                            <constraint firstItem="WTE-fd-I6F" firstAttribute="centerX" secondItem="DVP-RZ-6da" secondAttribute="centerX" id="Tjz-CZ-N0d"/>
+                            <constraint firstItem="sKn-xC-FxT" firstAttribute="centerX" secondItem="WTE-fd-I6F" secondAttribute="centerX" id="Tz9-BD-00U"/>
+                            <constraint firstItem="DVP-RZ-6da" firstAttribute="trailing" secondItem="XQj-pb-aEN" secondAttribute="trailing" id="dDM-Nr-NES"/>
+                            <constraint firstAttribute="trailing" secondItem="0aH-nv-CHV" secondAttribute="trailing" id="eB2-9O-vRI"/>
+                            <constraint firstItem="0aH-nv-CHV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="eW0-Tp-9qI"/>
+                            <constraint firstItem="XQj-pb-aEN" firstAttribute="top" secondItem="VuR-E3-Gxe" secondAttribute="bottom" constant="43" id="fCM-pl-npw"/>
+                            <constraint firstItem="VuR-E3-Gxe" firstAttribute="trailing" secondItem="XQj-pb-aEN" secondAttribute="trailing" id="iyK-EP-0Od"/>
+                            <constraint firstItem="vUt-Lr-rki" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kAj-zK-Rww"/>
+                            <constraint firstAttribute="trailing" secondItem="vUt-Lr-rki" secondAttribute="trailing" id="l7h-Jn-RNj"/>
+                            <constraint firstItem="DVP-RZ-6da" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="56" id="m9p-rn-a2V"/>
+                            <constraint firstItem="XQj-pb-aEN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="56" id="rGo-3k-ev2"/>
+                            <constraint firstItem="0aH-nv-CHV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rYr-4P-TtN"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vUt-Lr-rki" secondAttribute="bottom" id="t8x-u3-HyG"/>
+                            <constraint firstItem="DVP-RZ-6da" firstAttribute="leading" secondItem="XQj-pb-aEN" secondAttribute="leading" id="uyx-Jy-nof"/>
+                            <constraint firstItem="vUt-Lr-rki" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wBz-JS-5ji"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0aH-nv-CHV" secondAttribute="bottom" id="zHi-Yk-XUo"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="login.png" width="600" height="836"/>
+        <image name="twitter-bird-transparent.png" width="300" height="300"/>
+        <image name="twitter-circle-transparent.png" width="512" height="512"/>
+    </resources>
+</document>
