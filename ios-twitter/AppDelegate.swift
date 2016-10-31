@@ -17,6 +17,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        if User.currentUser != nil {
+            print("Current User: \(User.currentUser!.name!)")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tweetsNavigationViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+            window?.rootViewController = tweetsNavigationViewController
+        }
+        else {
+            print("No Current User")
+        }
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (Notification) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateInitialViewController()
+
+            UIView.transition(with: self.window!, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                self.window?.rootViewController = initialViewController
+                }, completion: nil)
+        }
+
         return true
     }
 
@@ -45,21 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         print(url)
 
-        let requestToken = BDBOAuth1Credential(queryString: url.query)
-        Twitter.instance.client.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: {(requestToken) -> Void in
-                print("SUCCESS: Access token received.")
-            }, failure: {(error) -> Void in
-                print("ERROR: " + (error?.localizedDescription)!)
-            })
-
-        Twitter.instance.client.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, response: Any?) in
-            print("SUCCESS: Account=")
-            print(response)
-            }, failure: { (task: URLSessionDataTask?, error: Error?) in
-            print("ERROR: " + (error?.localizedDescription)!)
-        })
+        TwitterClient.instance.handleOpenUrl(url: url)
 
         return true
     }
 }
-
