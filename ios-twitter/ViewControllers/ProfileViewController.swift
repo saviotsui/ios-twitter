@@ -22,25 +22,36 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var backButton: UIBarButtonItem!
-
+    @IBOutlet weak var tweetTable: UITableView!
+    
     var user: User!
+    fileprivate var tweets = [Tweet]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.tintColor = UIColor.white
 
-        backgroundImageView.setImageWith(user.profileBackgroundUrl!)
-        profileImageView.setImageWith(user.profileUrl!)
-        descriptionLabel.text = user.tagLine
-        friendsLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 12)
-        friendsLabel.text = String.fontAwesomeIcon("user")! + " " + String(describing: user.friendsCount!)
-        tweetsLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 12)
-        tweetsLabel.text = String.fontAwesomeIcon("twitter-square")! + " " + String(describing: user.statusesCount!)
-        followersLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 12)
-        followersLabel.text = String.fontAwesomeIcon("users")! + " " + String(describing: user.followersCount!)
-        screenNameLabel.text = user.screenName
-        nameLabel.text = user.name
+        self.tweetTable.delegate = self
+        self.tweetTable.dataSource = self
+        self.tweetTable.estimatedRowHeight = 150
+        self.tweetTable.rowHeight = UITableViewAutomaticDimension
+
+        self.backgroundImageView.setImageWith(user.profileBackgroundUrl!)
+        self.profileImageView.setImageWith(user.profileUrl!)
+        self.profileImageView.layer.cornerRadius = 4
+        self.profileImageView.clipsToBounds = true
+        self.descriptionLabel.text = user.tagLine
+        self.friendsLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 12)
+        self.friendsLabel.text = String.fontAwesomeIcon("user")! + " " + String(describing: user.friendsCount!)
+        self.tweetsLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 12)
+        self.tweetsLabel.text = String.fontAwesomeIcon("twitter-square")! + " " + String(describing: user.statusesCount!)
+        self.followersLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 12)
+        self.followersLabel.text = String.fontAwesomeIcon("users")! + " " + String(describing: user.followersCount!)
+        self.screenNameLabel.text = user.screenName
+        self.nameLabel.text = user.name
+
+        refreshTweets()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +62,26 @@ class ProfileViewController: UIViewController {
     @IBAction func onBackButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
+    
+    func refreshTweets(refreshControl: UIRefreshControl? = nil) {
+        TwitterClient.instance.userTimeline(screenName: user.screenName!, success: { (tweets) in
+            self.tweets = tweets
+            self.tweetTable.reloadData()
+
+            print("In UserTimeline")
+            for tweet in tweets {
+                print(tweet.text)
+                print(tweet.user?.name)
+            }
+            refreshControl?.endRefreshing()
+            }, failure: { (error) in
+                print("In UserTimeline Error")
+                print(error?.localizedDescription)
+
+                refreshControl?.endRefreshing()
+        })
+    }
+
 
     /*
     // MARK: - Navigation
@@ -62,4 +93,22 @@ class ProfileViewController: UIViewController {
     }
     */
 
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tweets.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "com.ios-twitter.TweetCell", for: indexPath) as! TweetCell
+        cell.tweet = tweets[indexPath.row]
+        return cell
+    }
 }

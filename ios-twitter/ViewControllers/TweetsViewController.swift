@@ -75,20 +75,54 @@ class TweetsViewController: UIViewController {
             let profileViewController = navigationController.topViewController as! ProfileViewController
             profileViewController.user = User.currentUser
         }
+        else if (navigationController.topViewController is ViewTweetViewController) {
+            let viewTweetViewController = navigationController.topViewController as! ViewTweetViewController
+            let indexPath = tweetTableView.indexPath(for: sender as! TweetCell)
+            let data = tweets[(indexPath?.row)!]
+
+            viewTweetViewController.tweet = data
+            viewTweetViewController.delegate = self
+        }
+        else if (navigationController.topViewController is CreateTweetViewController) {
+            let createTweetViewController = navigationController.topViewController as! CreateTweetViewController
+
+            let createTweet = CreateTweet(viewTitle: "Create a Tweet")
+            createTweetViewController.createTweet = createTweet
+            createTweetViewController.delegate = self
+        }
     }
 }
 
 extension TweetsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension TweetsViewController: UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "com.ios-twitter.TweetCell", for: indexPath) as! TweetCell
         cell.tweet = tweets[indexPath.row]
         return cell
+    }
+}
+
+extension TweetsViewController: CreateTweetViewControllerDelegate {
+    func createTweetViewController(createTweetViewController: CreateTweetViewController, didCreateTweet tweet: Tweet) {
+        self.tweets.insert(tweet, at: 0)
+        self.tweetTableView.reloadData()
+    }
+}
+
+extension TweetsViewController: ViewTweetViewControllerDelegate {
+    func viewTweetViewController(viewTweetViewController: ViewTweetViewController, didReplyTweets tweets: [Tweet]) {
+        for tweet in tweets {
+            self.tweets.insert(tweet, at: 0)
+        }
+        self.tweetTableView.reloadData()
     }
 }

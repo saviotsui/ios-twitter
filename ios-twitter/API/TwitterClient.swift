@@ -34,9 +34,9 @@ class TwitterClient: BDBOAuth1SessionManager {
             success: {(requestToken: BDBOAuth1Credential?) -> Void in
                 print("SUCCESS: token received")
                 let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=" + (requestToken?.token)!)
-                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-
-                success()
+                UIApplication.shared.open(url!, options: [:], completionHandler:  { (Bool) in
+                    success()
+                })
             },
             failure: { (error) in
                 self.loginFailure?(error)
@@ -73,15 +73,32 @@ class TwitterClient: BDBOAuth1SessionManager {
 
     func homeTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (Error?) -> ()) {
         print("TwitterClient: statuses/home_timeline")
-
         TwitterClient.instance.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task, response: Any?) in
 
             let tweetDictionaries = response as! [NSDictionary]
             let tweets = Tweet.TweetsFromArray(dictionaries: tweetDictionaries)
 
             success(tweets)
-        }, failure: { (task: URLSessionDataTask?, error: Error?) in
-            failure(error)
+            }, failure: { (task: URLSessionDataTask?, error: Error?) in
+                failure(error)
+        })
+    }
+
+    func userTimeline(screenName: String, count: Int = 20, success: @escaping ([Tweet]) -> (), failure: @escaping (Error?) -> ()) {
+        print("TwitterClient: statuses/user_timeline")
+
+        let params = ["screen_name" : screenName,
+                      "count" : count,
+                      "include_rts": true] as [String : Any]
+
+        TwitterClient.instance.get("1.1/statuses/user_timeline.json", parameters: params, progress: nil, success: { (task, response: Any?) in
+
+            let tweetDictionaries = response as! [NSDictionary]
+            let tweets = Tweet.TweetsFromArray(dictionaries: tweetDictionaries)
+
+            success(tweets)
+            }, failure: { (task: URLSessionDataTask?, error: Error?) in
+                failure(error)
         })
     }
 
@@ -96,13 +113,59 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
 
-    func postTweet(tweet: String, success: @escaping (_ response: Any?) -> (), failure: @escaping (Error?) -> ()) {
+    func postTweet(tweet: String, replyId: String = "", success: @escaping (_ response: Any?) -> (), failure: @escaping (Error?) -> ()) {
         print("TwitterClient: statuses/update.json")
 
-        TwitterClient.instance.post("1.1/statuses/update.json", parameters: ["status": tweet], progress: nil, success: { (task, response: Any?) in
+        var params = ["status": tweet]
+
+        if (replyId != "") {
+            params["in_reply_to_status_id"] = replyId
+        }
+
+        TwitterClient.instance.post("1.1/statuses/update.json", parameters: params, progress: nil, success: { (task, response: Any?) in
             success(response)
             }) { (task: URLSessionDataTask?, error: Error?) in
                 failure(error)
+        }
+    }
+
+    func favoriteTweet(tweetId: String, success: @escaping(_ response: Any?) -> (), failure: @escaping (Error?) -> ()) {
+        print("TwitterClient: favorites/create.json")
+
+        TwitterClient.instance.post("1.1/favorites/create.json", parameters: ["id": tweetId], progress: nil, success: { (task, response: Any?) in
+            success(response)
+        }) { (task: URLSessionDataTask?, error: Error?) in
+            failure(error)
+        }
+    }
+
+    func unfavoriteTweet(tweetId: String, success: @escaping(_ response: Any?) -> (), failure: @escaping (Error?) -> ()) {
+        print("TwitterClient: favorites/destroy")
+
+        TwitterClient.instance.post("1.1/favorites/destroy.json", parameters: ["id": tweetId], progress: nil, success: { (task, response: Any?) in
+            success(response)
+        }) { (task: URLSessionDataTask?, error: Error?) in
+            failure(error)
+        }
+    }
+
+    func retweet(tweetId: String, success: @escaping(_ response: Any?) -> (), failure: @escaping (Error?) -> ()) {
+        print("TwitterClient: statuses/retweet")
+
+        TwitterClient.instance.post("1.1/statuses/retweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task, response: Any?) in
+            success(response)
+        }) { (task: URLSessionDataTask?, error: Error?) in
+            failure(error)
+        }
+    }
+
+    func unRetweet(tweetId: String, success: @escaping(_ response: Any?) -> (), failure: @escaping (Error?) -> ()) {
+        print("TwitterClient: statuses/retweet")
+
+        TwitterClient.instance.post("1.1/statuses/unretweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task, response: Any?) in
+            success(response)
+        }) { (task: URLSessionDataTask?, error: Error?) in
+            failure(error)
         }
     }
 }

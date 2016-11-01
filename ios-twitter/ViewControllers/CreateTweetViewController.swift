@@ -15,14 +15,22 @@ class CreateTweetViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var numCharactersLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var screenNameLabel: UILabel!
 
     fileprivate let placeholderTweetText = "Tweet something!"
     fileprivate let maxCharacters = 140
+    fileprivate var tweet: Tweet?
+
+    weak var delegate: CreateTweetViewControllerDelegate?
+
+    var createTweet: CreateTweet?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.title = createTweet?.viewTitle
 
         self.tweetTextView.textColor = UIColor.lightGray
         self.tweetTextView.alpha = 1.0
@@ -30,7 +38,11 @@ class CreateTweetViewController: UIViewController {
         self.tweetTextView.becomeFirstResponder()
         self.tweetTextView.delegate = self
 
-        self.profileImageView.setImageWith((User.currentUser?.profileUrl)!)
+        self.profileImageView.setImageWith((User.currentUser!.profileUrl)!)
+        self.profileImageView.layer.cornerRadius = 4
+        self.profileImageView.clipsToBounds = true
+        self.nameLabel.text = User.currentUser!.name!
+        self.screenNameLabel.text = "@\(User.currentUser!.screenName!)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,28 +55,23 @@ class CreateTweetViewController: UIViewController {
     }
 
     @IBAction func onPostButton(_ sender: UIBarButtonItem) {
-        TwitterClient.instance.postTweet(tweet: self.tweetTextView.text, success: { (response) in
+        var replyId = ""
+        if (self.createTweet?.replyTweet != nil) {
+            replyId = self.createTweet!.replyTweet!.id!
+        }
+
+        TwitterClient.instance.postTweet(tweet: self.tweetTextView.text, replyId: replyId, success: { (response) in
             print("SUCCESS: Tweeted: \(self.tweetTextView.text!)")
 
             // create a new Tweet object and shove it into the Tweet array in TweetsViewController
-            var tweet = Tweet(dictionary: response as! NSDictionary)
-
+            self.tweet = Tweet(dictionary: response as! NSDictionary)
             self.dismiss(animated: true, completion: nil)
-            }) { (error) in
-                Utilities.displayOKAlert(viewController: self, message: "Unable to Tweet. Please try again.")
-                print("ERROR: " + (error?.localizedDescription)!)
+            self.delegate?.createTweetViewController(createTweetViewController: self, didCreateTweet: self.tweet!)
+        }) { (error) in
+            Utilities.displayOKAlert(viewController: self, message: "Unable to Tweet. Please try again.")
+            print("ERROR: " + (error?.localizedDescription)!)
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension CreateTweetViewController: UITextViewDelegate {

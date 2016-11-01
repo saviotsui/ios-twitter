@@ -23,6 +23,8 @@ class TweetCell: UITableViewCell {
             tweetLabel.text = tweet.text
             timeStampLabel.text = Utilities.timeAgoSinceDate(date: tweet.timestamp!, numericDates: true)
             profileImageView.setImageWith((tweet.user?.profileUrl)!)
+            profileImageView.layer.cornerRadius = 4
+            profileImageView.clipsToBounds = true
         }
     }
 
