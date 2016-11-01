@@ -148,6 +148,7 @@
                                                 <constraint firstItem="UQz-Bi-Dky" firstAttribute="leading" secondItem="NWm-V8-Dy3" secondAttribute="leading" constant="8" id="Ody-jX-1Zw"/>
                                                 <constraint firstItem="UQz-Bi-Dky" firstAttribute="top" secondItem="NWm-V8-Dy3" secondAttribute="top" constant="8" id="U2K-5I-kzj"/>
                                                 <constraint firstAttribute="trailing" secondItem="8sM-oF-9sX" secondAttribute="trailing" constant="8" id="Y4o-JS-rZO"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="UQz-Bi-Dky" secondAttribute="bottom" constant="8" id="cN1-rk-xfu"/>
                                                 <constraint firstItem="8sM-oF-9sX" firstAttribute="top" secondItem="UQz-Bi-Dky" secondAttribute="top" id="czF-CD-1Db"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -457,6 +458,7 @@
                                                 <constraint firstItem="GsP-qm-M4e" firstAttribute="leading" secondItem="SpJ-T5-zdn" secondAttribute="leading" id="MaH-py-OBt"/>
                                                 <constraint firstAttribute="trailing" secondItem="GsP-qm-M4e" secondAttribute="trailing" constant="8" id="VGG-hp-i94"/>
                                                 <constraint firstItem="hsb-X5-aiq" firstAttribute="leading" secondItem="l62-5s-iwd" secondAttribute="leading" constant="8" id="VgY-qG-fYi"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hsb-X5-aiq" secondAttribute="bottom" constant="8" id="WEB-PL-5n3"/>
                                                 <constraint firstItem="5WR-ua-i9F" firstAttribute="top" secondItem="hsb-X5-aiq" secondAttribute="top" id="cWs-CI-C9w"/>
                                                 <constraint firstItem="GsP-qm-M4e" firstAttribute="top" secondItem="5WR-ua-i9F" secondAttribute="bottom" constant="8" id="dQb-fC-uN4"/>
                                                 <constraint firstAttribute="trailing" secondItem="5WR-ua-i9F" secondAttribute="trailing" constant="8" id="ePS-kx-lwR"/>
@@ -611,7 +613,7 @@
             <objects>
                 <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="k0Q-n1-ym6" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zEt-Gf-PJg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zEt-Gf-PJg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -633,7 +635,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9h8-hY-ixG" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aRl-GJ-fBt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aRl-GJ-fBt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -655,7 +657,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0mR-q7-6WH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="a5m-GU-eJf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a5m-GU-eJf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -677,7 +679,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="44G-YX-BXD" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="M8m-Qo-Les">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="M8m-Qo-Les">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -701,7 +703,7 @@
         <image name="twitter-circle-transparent.png" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rku-ia-ZHt"/>
+        <segue reference="bER-Yi-zAM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
