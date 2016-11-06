@@ -52,13 +52,13 @@ class TweetsViewController: UIViewController {
 
             print("In HomeTimeline")
             for tweet in tweets {
-                print(tweet.text)
-                print(tweet.user?.name)
+                print(tweet.text!)
+                print(tweet.user!.name!)
             }
             refreshControl?.endRefreshing()
             }, failure: { (error) in
                 print("In HomeTimeline Error")
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
 
                 refreshControl?.endRefreshing()
         })

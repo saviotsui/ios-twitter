@@ -68,7 +68,7 @@ class CreateTweetViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
             self.delegate?.createTweetViewController(createTweetViewController: self, didCreateTweet: self.tweet!)
         }) { (error) in
-            Utilities.displayOKAlert(viewController: self, message: "Unable to Tweet. Please try again.")
+            Utilities.displayOKAlert(viewController: self, message: "Unable to Tweet. Please try again.", title: "Uh-oh")
             print("ERROR: " + (error?.localizedDescription)!)
         }
     }

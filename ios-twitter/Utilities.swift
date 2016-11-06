@@ -11,9 +11,9 @@ import Foundation
 
 class Utilities {
 
-    static func displayOKAlert(viewController: UIViewController, message: String) {
+    static func displayOKAlert(viewController: UIViewController, message: String, title: String) {
         // Show the errorString somewhere and let the user try again.
-        let alertController = UIAlertController(title: "Title", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         // create an OK action
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
