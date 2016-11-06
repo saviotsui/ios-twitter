@@ -219,7 +219,7 @@
 					Separator,
 				);
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Savio Tsui";
 				TargetAttributes = {
 					A88D84971DC1C9390076175D = {
