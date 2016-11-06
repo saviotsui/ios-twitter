@@ -26,8 +26,14 @@ class LoginViewController: UIViewController {
 
     @IBAction func onSignIn(_ sender: UIButton) {
         TwitterClient.instance.login(success: { () in
-            print("SUCCESS: Logged in.")
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            TwitterClient.instance.verifyCredentials(success: { (user) in
+                print("SUCCESS: Logged in.")
+                User.currentUser = user
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }, failure: { (error) in
+                print("ERROR: " + (error?.localizedDescription)!)
+            })
+
         }) { (error) in
             print("ERROR: " + (error?.localizedDescription)!)
         }

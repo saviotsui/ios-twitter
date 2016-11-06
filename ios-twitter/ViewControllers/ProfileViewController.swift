@@ -70,13 +70,13 @@ class ProfileViewController: UIViewController {
 
             print("In UserTimeline")
             for tweet in tweets {
-                print(tweet.text)
-                print(tweet.user?.name)
+                print(tweet.text!)
+                print(tweet.user!.name!)
             }
             refreshControl?.endRefreshing()
             }, failure: { (error) in
                 print("In UserTimeline Error")
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
 
                 refreshControl?.endRefreshing()
         })

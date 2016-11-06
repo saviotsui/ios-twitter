@@ -77,7 +77,7 @@ class ViewTweetViewController: UIViewController {
                 self.retweetCountLabel.text = String(self.tweet.retweetCount)
                 self.tweet.retweeted = false
             }) { (error) in
-                Utilities.displayOKAlert(viewController: self, message: "Unable to unretweet. Please try again.")
+                Utilities.displayOKAlert(viewController: self, message: "Unable to unretweet. Please try again.", title: "Uh-oh")
                 print("ERROR: " + (error?.localizedDescription)!)
             }
         }
@@ -88,7 +88,7 @@ class ViewTweetViewController: UIViewController {
                 self.retweetCountLabel.text = String(self.tweet.retweetCount)
                 self.tweet.retweeted = true
             }) { (error) in
-                Utilities.displayOKAlert(viewController: self, message: "Unable to retweet. Please try again.")
+                Utilities.displayOKAlert(viewController: self, message: "Unable to retweet. Please try again.", title: "Uh-oh")
                 print("ERROR: " + (error?.localizedDescription)!)
             }
         }
@@ -103,7 +103,7 @@ class ViewTweetViewController: UIViewController {
                 self.favoritesCountLabel.text = String(self.tweet.favouritesCount)
                 self.tweet.favourited = false
             }) { (error) in
-                Utilities.displayOKAlert(viewController: self, message: "Unable to unfavorite tweet. Please try again.")
+                Utilities.displayOKAlert(viewController: self, message: "Unable to unfavorite tweet. Please try again.", title: "Uh-oh")
                 print("ERROR: " + (error?.localizedDescription)!)
             }
         }
@@ -114,7 +114,7 @@ class ViewTweetViewController: UIViewController {
                 self.favoritesCountLabel.text = String(self.tweet.favouritesCount)
                 self.tweet.favourited = true
             }) { (error) in
-                Utilities.displayOKAlert(viewController: self, message: "Unable to favorite tweet. Please try again.")
+                Utilities.displayOKAlert(viewController: self, message: "Unable to favorite tweet. Please try again.", title: "Uh-oh")
                 print("ERROR: " + (error?.localizedDescription)!)
             }
         }
