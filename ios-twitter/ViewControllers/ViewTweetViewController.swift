@@ -122,7 +122,6 @@ class ViewTweetViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationController = segue.destination as! UINavigationController
-
         if (navigationController.topViewController is CreateTweetViewController) {
             let createTweetViewController = navigationController.topViewController as! CreateTweetViewController
 

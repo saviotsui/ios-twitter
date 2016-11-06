@@ -18,10 +18,20 @@ class TweetsViewController: UIViewController {
     @IBOutlet weak var newTweetButton: UIBarButtonItem!
 
     fileprivate var tweets = [Tweet]()
+    
+    fileprivate var viewTweetController: UIViewController!
+    fileprivate var profileViewController: UIViewController!
 
+    fileprivate var firstLoad = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if (!firstLoad) {
+            firstLoad = false
+            return
+        }
+        
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.logoutButton.icon(from: .FontAwesome, code: "sign-out", ofSize: 20)
         self.profileButton.icon(from: .FontAwesome, code: "twitter", ofSize: 20)
@@ -31,6 +41,10 @@ class TweetsViewController: UIViewController {
         self.tweetTableView.dataSource = self
         self.tweetTableView.estimatedRowHeight = 150
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        viewTweetController = storyboard.instantiateViewController(withIdentifier: "ViewTweetViewController")
+        profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
 
         refreshTweets()
 
@@ -67,7 +81,7 @@ class TweetsViewController: UIViewController {
     @IBAction func onLogout(_ sender: UIBarButtonItem) {
         TwitterClient.instance.logout()
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationController = segue.destination as! UINavigationController
 
@@ -96,6 +110,9 @@ class TweetsViewController: UIViewController {
 extension TweetsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        (viewTweetController as! ViewTweetViewController).tweet = tweets[indexPath.row]
+        self.navigationController?.pushViewController(viewTweetController, animated: true)
     }
 }
 
@@ -107,6 +124,7 @@ extension TweetsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "com.ios-twitter.TweetCell", for: indexPath) as! TweetCell
         cell.tweet = tweets[indexPath.row]
+        cell.delegate = self
         return cell
     }
 }
@@ -124,5 +142,12 @@ extension TweetsViewController: ViewTweetViewControllerDelegate {
             self.tweets.insert(tweet, at: 0)
         }
         self.tweetTableView.reloadData()
+    }
+}
+
+extension TweetsViewController: TweetCellDelegate {
+    func tweetCell(tweetCell: TweetCell, didTapProfile user: User) {
+        (profileViewController as! ProfileViewController).user = user
+        self.navigationController?.pushViewController(profileViewController, animated: true)
     }
 }
