@@ -27,6 +27,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var tweetTable: UITableView!
     
     var user: User!
+    var isUserFromHamburger: Bool = false
+    
     fileprivate var tweets = [Tweet]()
     
     override func viewDidLoad() {
@@ -34,6 +36,13 @@ class ProfileViewController: UIViewController {
 
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.hamburgerMenuButton.icon(from: .FontAwesome, code: "bars", ofSize: 20)
+        
+        if (isUserFromHamburger) {
+            self.backButton.isEnabled = false
+        }
+        else {
+            self.backButton.isEnabled = true
+        }
 
         self.tweetTable.delegate = self
         self.tweetTable.dataSource = self
@@ -52,7 +61,7 @@ class ProfileViewController: UIViewController {
         self.tweetsLabel.text = String.fontAwesomeIcon("twitter-square")! + " " + String(describing: user.statusesCount!)
         self.followersLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 12)
         self.followersLabel.text = String.fontAwesomeIcon("users")! + " " + String(describing: user.followersCount!)
-        self.screenNameLabel.text = user.screenName
+        self.screenNameLabel.text = String("@\(user!.screenName!)")
         self.nameLabel.text = user.name
 
         refreshTweets()
@@ -63,13 +72,18 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func onHamburgerButton(_ sender: UIBarButtonItem) {
+    }
+    
     @IBAction func onBackButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
         _ = self.navigationController?.popViewController(animated: true)
         
         if (self.navigationController?.topViewController is TweetsViewController) {
             let tweetsViewController = self.navigationController?.topViewController as! TweetsViewController
-            tweetsViewController.shouldRefresh = false
+            
+            let viewTweetData = ViewTweets(shouldRefresh: false, timelineTitle: "Timeline")
+            tweetsViewController.viewTweets = viewTweetData
         }
     }
     

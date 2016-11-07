@@ -33,6 +33,7 @@
 		B23640AE1DCFE88D004FF927 /* HamburgerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23640AD1DCFE88D004FF927 /* HamburgerMenuViewController.swift */; };
 		B2C3E5B81DCFEE08002E425D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3E5B71DCFEE08002E425D /* MenuViewController.swift */; };
 		B2C3E5BE1DCFEEC2002E425D /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3E5BD1DCFEEC2002E425D /* MenuCell.swift */; };
+		B2C3E5C41DD03BDD002E425D /* ViewsTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3E5C31DD03BDD002E425D /* ViewsTweets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		B23640AD1DCFE88D004FF927 /* HamburgerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HamburgerMenuViewController.swift; path = ViewControllers/HamburgerMenuViewController.swift; sourceTree = "<group>"; };
 		B2C3E5B71DCFEE08002E425D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = ViewControllers/MenuViewController.swift; sourceTree = "<group>"; };
 		B2C3E5BD1DCFEEC2002E425D /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuCell.swift; path = Views/MenuCell.swift; sourceTree = "<group>"; };
+		B2C3E5C31DD03BDD002E425D /* ViewsTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewsTweets.swift; path = Models/ViewsTweets.swift; sourceTree = "<group>"; };
 		FEBEEB286062C5664951CF8E /* Pods-ios-twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-twitter/Pods-ios-twitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 				A87DD2111DC6A28D00F5B944 /* User.swift */,
 				A87DD2131DC6A2A400F5B944 /* Tweet.swift */,
 				A8DBAC931DC856760073F5D8 /* CreateTweet.swift */,
+				B2C3E5C31DD03BDD002E425D /* ViewsTweets.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			files = (
 				A87DD2121DC6A28D00F5B944 /* User.swift in Sources */,
 				A8DBAC941DC856760073F5D8 /* CreateTweet.swift in Sources */,
+				B2C3E5C41DD03BDD002E425D /* ViewsTweets.swift in Sources */,
 				B2C3E5BE1DCFEEC2002E425D /* MenuCell.swift in Sources */,
 				A82222F01DC6CCDA009916E6 /* TweetCell.swift in Sources */,
 				A87DD2141DC6A2A400F5B944 /* Tweet.swift in Sources */,

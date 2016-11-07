@@ -96,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="142" y="287"/>
         </scene>
         <!--Hamburger Menu View Controller-->
         <scene sceneID="XNg-eZ-uET">
@@ -302,7 +302,7 @@
                         <leftBarButtonItems>
                             <barButtonItem title="Menu" id="Va7-ac-kOi">
                                 <connections>
-                                    <action selector="onHamburgerMenu:" destination="61b-OW-6mw" id="VBP-FE-OLh"/>
+                                    <action selector="onHamburgerButton:" destination="61b-OW-6mw" id="SGT-kC-Acx"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Logout" id="53H-0N-Ogh">
@@ -476,7 +476,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Tweet" id="9Mw-gI-64G">
                         <leftBarButtonItems>
-                            <barButtonItem title="Menu" id="mzH-QY-g1M"/>
+                            <barButtonItem title="Menu" id="mzH-QY-g1M">
+                                <connections>
+                                    <action selector="onHamburgerButton:" destination="mtQ-P5-HVx" id="u2P-7c-aKS"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Back" id="cbe-My-Nym">
                                 <connections>
                                     <action selector="onBackButton:" destination="mtQ-P5-HVx" id="MO0-9T-mIG"/>
@@ -663,7 +667,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="txS-7q-AMY">
                         <leftBarButtonItems>
-                            <barButtonItem title="Menu" id="BwS-vy-UGD"/>
+                            <barButtonItem title="Menu" id="BwS-vy-UGD">
+                                <connections>
+                                    <action selector="onHamburgerButton:" destination="PDq-Bs-66n" id="JjS-Zd-m0W"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Back" id="D9T-lp-CAc">
                                 <connections>
                                     <action selector="onBackButton:" destination="PDq-Bs-66n" id="m5p-rf-Wza"/>
@@ -780,7 +788,7 @@
             <objects>
                 <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="k0Q-n1-ym6" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zEt-Gf-PJg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zEt-Gf-PJg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -802,7 +810,7 @@
             <objects>
                 <navigationController storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9h8-hY-ixG" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aRl-GJ-fBt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aRl-GJ-fBt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -824,7 +832,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CreateTweetNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0mR-q7-6WH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="a5m-GU-eJf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a5m-GU-eJf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -846,7 +854,7 @@
             <objects>
                 <navigationController storyboardIdentifier="ViewTweetNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="44G-YX-BXD" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="M8m-Qo-Les">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="M8m-Qo-Les">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.18048655990000001" green="0.66715729239999999" blue="0.88376814130000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -868,7 +876,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="jq4-vD-C6F" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="W6W-nS-1Te">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W6W-nS-1Te">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -886,7 +894,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="AJ2-Se-U6Z" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="K60-N9-XSL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="K60-N9-XSL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -906,7 +914,7 @@
         <image name="twitter-circle-transparent.png" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rku-ia-ZHt"/>
+        <segue reference="bER-Yi-zAM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -67,15 +67,17 @@ class ViewTweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onHamburgerButton(_ sender: UIBarButtonItem) {
+    }
+    
     @IBAction func onBackButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
         _ = self.navigationController?.popViewController(animated: true)
         
         if (self.navigationController?.topViewController is TweetsViewController) {
-            delegate?.viewTweetViewController(viewTweetViewController: self, didReplyTweets: replyTweets)
-            
             let tweetsViewController = self.navigationController?.topViewController as! TweetsViewController
-            tweetsViewController.shouldRefresh = false
+            let viewTweetsData = ViewTweets(shouldRefresh: false, timelineTitle: "Timeline")
+            tweetsViewController.viewTweets = viewTweetsData
         }
     }
 

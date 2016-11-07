@@ -14,11 +14,12 @@ class MenuViewController: UIViewController {
     
     var hamburgerViewController: HamburgerMenuViewController!
     
-    var menuTitles: [String] = ["Profile", "Timeline"]
+    var menuTitles: [String] = ["Profile", "Timeline", "Mentions"]
     var menuViewControllers: [UIViewController] = []
     
     fileprivate var profileNavigationController: UIViewController!
     fileprivate var tweetsNavigationController: UIViewController!
+    fileprivate var mentionTweetsNavigationController: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +30,12 @@ class MenuViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         profileNavigationController = storyboard.instantiateViewController(withIdentifier: "ProfileNavigationController")
         tweetsNavigationController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+        mentionTweetsNavigationController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+        ((mentionTweetsNavigationController as! UINavigationController).topViewController as! TweetsViewController).viewTweets = ViewTweets(shouldRefresh: true, timelineTitle: "Mentions")
         
         menuViewControllers.append(profileNavigationController)
         menuViewControllers.append(tweetsNavigationController)
+        menuViewControllers.append(mentionTweetsNavigationController)
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,7 +58,7 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return menuViewControllers.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -64,7 +68,9 @@ extension MenuViewController: UITableViewDelegate {
         
         if (activeViewController is UINavigationController) {
             if (activeViewController as! UINavigationController).topViewController is ProfileViewController {
-                ((activeViewController as! UINavigationController).topViewController as! ProfileViewController).user = User.currentUser
+                let profileViewController = ((activeViewController as! UINavigationController).topViewController as! ProfileViewController)
+                profileViewController.user = User.currentUser
+                profileViewController.isUserFromHamburger = true
             }
         }
         

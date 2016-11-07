@@ -101,6 +101,19 @@ class TwitterClient: BDBOAuth1SessionManager {
                 failure(error)
         })
     }
+    
+    func mentionsTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (Error?) -> ()) {
+        print("TwitterClient: statuses/mentions_timeline")
+        TwitterClient.instance.get("1.1/statuses/mentions_timeline.json", parameters: nil, progress: nil, success: { (task, response: Any?) in
+            
+            let tweetDictionaries = response as! [NSDictionary]
+            let tweets = Tweet.TweetsFromArray(dictionaries: tweetDictionaries)
+            
+            success(tweets)
+        }, failure: { (task: URLSessionDataTask?, error: Error?) in
+            failure(error)
+        })
+    }
 
     func verifyCredentials(success: @escaping (User) -> (), failure: @escaping (Error?) -> ()) {
         print("TwitterClient: account/verify_credentials")
