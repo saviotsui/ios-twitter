@@ -14,8 +14,8 @@ class MenuViewController: UIViewController {
     
     var hamburgerViewController: HamburgerMenuViewController!
     
-    var menuTitles: [String] = ["Profile", "Timeline", "Mentions"]
-    var menuViewControllers: [UIViewController] = []
+    var menuTitles: [String] = ["Profile", "Timeline", "Mentions", "Log out"]
+    var menuViewControllers: [UIViewController?] = []
     
     fileprivate var profileNavigationController: UIViewController!
     fileprivate var tweetsNavigationController: UIViewController!
@@ -36,6 +36,7 @@ class MenuViewController: UIViewController {
         menuViewControllers.append(profileNavigationController)
         menuViewControllers.append(tweetsNavigationController)
         menuViewControllers.append(mentionTweetsNavigationController)
+        menuViewControllers.append(nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,8 +66,12 @@ extension MenuViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let activeViewController = self.menuViewControllers[indexPath.row]
-        
-        if (activeViewController is UINavigationController) {
+
+        if (activeViewController == nil) {
+            TwitterClient.instance.logout()
+            return
+        }
+        else if (activeViewController is UINavigationController) {
             if (activeViewController as! UINavigationController).topViewController is ProfileViewController {
                 let profileViewController = ((activeViewController as! UINavigationController).topViewController as! ProfileViewController)
                 profileViewController.user = User.currentUser

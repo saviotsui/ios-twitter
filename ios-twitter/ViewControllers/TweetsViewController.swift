@@ -13,7 +13,6 @@ import SwiftIconFont
 class TweetsViewController: UIViewController {
 
     @IBOutlet weak var tweetTableView: UITableView!
-    @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var newTweetButton: UIBarButtonItem!
     @IBOutlet weak var hamburgerMenuButton: UIBarButtonItem!
 
@@ -29,7 +28,6 @@ class TweetsViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationItem.title = viewTweets.timelineTitle
         self.hamburgerMenuButton.icon(from: .FontAwesome, code: "bars", ofSize: 20)
-        self.logoutButton.icon(from: .FontAwesome, code: "sign-out", ofSize: 20)
         self.newTweetButton.icon(from: .FontAwesome, code: "plus", ofSize: 20)
 
         self.tweetTableView.delegate = self
@@ -94,13 +92,6 @@ class TweetsViewController: UIViewController {
 
     @IBAction func onHamburgerButton(_ sender: UIBarButtonItem) {
         
-    }
-    
-    @IBAction func onLogout(_ sender: UIBarButtonItem) {
-        TwitterClient.instance.logout()
-    }
-    
-    @IBAction func onHamburgerMenu(_ sender: UIBarButtonItem) {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
