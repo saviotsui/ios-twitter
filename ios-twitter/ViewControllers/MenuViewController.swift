@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftIconFont
 
 class MenuViewController: UIViewController {
 
@@ -14,7 +15,10 @@ class MenuViewController: UIViewController {
     
     var hamburgerViewController: HamburgerMenuViewController!
     
-    var menuTitles: [String] = ["Profile", "Timeline", "Mentions", "Log out"]
+    var menuTitles: [String] = [String.fontAwesomeIcon("user")! + " Profile",
+                                String.fontAwesomeIcon("home")! + " Timeline",
+                                String.fontAwesomeIcon("comment")! + " Mentions",
+                                String.fontAwesomeIcon("sign-out")! + " Log out"]
     var menuViewControllers: [UIViewController?] = []
     
     fileprivate var profileNavigationController: UIViewController!
@@ -26,6 +30,8 @@ class MenuViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         profileNavigationController = storyboard.instantiateViewController(withIdentifier: "ProfileNavigationController")
@@ -91,6 +97,8 @@ extension MenuViewController: UITableViewDelegate {
 extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "com.ios-twitter.MenuCell", for: indexPath) as! MenuCell
+        
+        cell.menuLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 18)
         cell.menuLabel.text = menuTitles[indexPath.row]
         return cell
     }

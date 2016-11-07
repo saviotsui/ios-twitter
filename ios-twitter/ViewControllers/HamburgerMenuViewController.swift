@@ -61,7 +61,7 @@ class HamburgerMenuViewController: UIViewController {
         else if sender.state == UIGestureRecognizerState.ended {
             UIView.animate(withDuration: 0.3, animations: {
                 if velocity.x > 0 {
-                    self.leftMarginConstraint.constant = self.view.frame.size.width - 50
+                    self.leftMarginConstraint.constant = self.view.frame.size.width - 175
                 }
                 else {
                     self.leftMarginConstraint.constant = 0

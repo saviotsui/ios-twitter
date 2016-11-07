@@ -87,6 +87,7 @@ class ViewTweetViewController: UIViewController {
                 print("SUCCESS: unretweeted: id=\(self.tweet.id!)")
                 self.tweet.retweetCount -= 1
                 self.retweetCountLabel.text = String(self.tweet.retweetCount)
+                self.retweetCountLabel.textColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
                 self.tweet.retweeted = false
             }) { (error) in
                 Utilities.displayOKAlert(viewController: self, message: "Unable to unretweet. Please try again.", title: "Uh-oh")
@@ -98,6 +99,7 @@ class ViewTweetViewController: UIViewController {
                 print("SUCCESS: Retweeted: id=\(self.tweet.id!)")
                 self.tweet.retweetCount += 1
                 self.retweetCountLabel.text = String(self.tweet.retweetCount)
+                self.retweetCountLabel.textColor = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
                 self.tweet.retweeted = true
             }) { (error) in
                 Utilities.displayOKAlert(viewController: self, message: "Unable to retweet. Please try again.", title: "Uh-oh")
@@ -113,6 +115,7 @@ class ViewTweetViewController: UIViewController {
                 print("SUCCESS: Unfavorited: id=\(self.tweet.id!)")
                 self.tweet.favouritesCount -= 1
                 self.favoritesCountLabel.text = String(self.tweet.favouritesCount)
+                self.favoritesCountLabel.textColor = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
                 self.tweet.favourited = false
             }) { (error) in
                 Utilities.displayOKAlert(viewController: self, message: "Unable to unfavorite tweet. Please try again.", title: "Uh-oh")
@@ -124,6 +127,7 @@ class ViewTweetViewController: UIViewController {
                 print("SUCCESS: Favorited: id=\(self.tweet.id!)")
                 self.tweet.favouritesCount += 1
                 self.favoritesCountLabel.text = String(self.tweet.favouritesCount)
+                self.favoritesCountLabel.textColor = #colorLiteral(red: 0.4078193307, green: 0.4078193307, blue: 0.4078193307, alpha: 1)
                 self.tweet.favourited = true
             }) { (error) in
                 Utilities.displayOKAlert(viewController: self, message: "Unable to favorite tweet. Please try again.", title: "Uh-oh")

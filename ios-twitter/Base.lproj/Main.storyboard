@@ -166,7 +166,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TJL-CZ-KYz">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="com.ios-twitter.MenuCell" rowHeight="61" id="t86-uO-hsl" customClass="MenuCell" customModule="ios_twitter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="61"/>
@@ -176,18 +178,20 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usd-Ab-liF">
-                                                    <rect key="frame" x="8" y="8" width="359" height="31"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="16" y="20" width="343" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="Usd-Ab-liF" firstAttribute="top" secondItem="VGO-TZ-xbs" secondAttribute="top" constant="8" id="JSK-BS-ztN"/>
-                                                <constraint firstAttribute="trailing" secondItem="Usd-Ab-liF" secondAttribute="trailing" constant="8" id="WxG-3p-cqC"/>
-                                                <constraint firstItem="Usd-Ab-liF" firstAttribute="leading" secondItem="VGO-TZ-xbs" secondAttribute="leading" constant="8" id="wBf-UI-6KM"/>
+                                                <constraint firstItem="Usd-Ab-liF" firstAttribute="centerY" secondItem="VGO-TZ-xbs" secondAttribute="centerY" id="bAZ-7X-qEy"/>
+                                                <constraint firstAttribute="trailing" secondItem="Usd-Ab-liF" secondAttribute="trailing" constant="16" id="bP3-8r-SlZ"/>
+                                                <constraint firstItem="Usd-Ab-liF" firstAttribute="leading" secondItem="VGO-TZ-xbs" secondAttribute="leading" constant="16" id="gi0-1k-AuE"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="menuLabel" destination="Usd-Ab-liF" id="KC8-2W-se2"/>
                                         </connections>
@@ -195,7 +199,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="qe4-JR-Z3I"/>
                     <connections>
@@ -497,7 +501,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ynb-Gu-rFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3113" y="1854"/>
+            <point key="canvasLocation" x="3969" y="1854"/>
         </scene>
         <!--Profile-->
         <scene sceneID="HPw-Zb-pxp">
@@ -687,7 +691,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMD-DP-LVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3113" y="287"/>
+            <point key="canvasLocation" x="3118" y="286"/>
         </scene>
         <!--Create a Tweet-->
         <scene sceneID="LFH-SF-jQD">
@@ -817,7 +821,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddB-fz-a7B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2262" y="288"/>
+            <point key="canvasLocation" x="2266" y="287"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="waa-1m-whF">
@@ -861,7 +865,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DP9-KJ-kJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2262" y="1854"/>
+            <point key="canvasLocation" x="3118" y="1854"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jl7-fd-UXd">
