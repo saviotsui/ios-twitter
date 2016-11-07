@@ -12,6 +12,7 @@ import SwiftIconFont
 
 class ViewTweetViewController: UIViewController {
 
+    @IBOutlet weak var hamburgerMenuButton: UIBarButtonItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var replyBarButton: UIBarButtonItem!
     @IBOutlet weak var replyButton: UIButton!
@@ -33,6 +34,8 @@ class ViewTweetViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hamburgerMenuButton.icon(from: .FontAwesome, code: "bars", ofSize: 20)
 
         retweetCountLabel.text = String(tweet.retweetCount)
         favoritesCountLabel.text = String(tweet.favouritesCount)
@@ -66,7 +69,14 @@ class ViewTweetViewController: UIViewController {
     
     @IBAction func onBackButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
-        delegate?.viewTweetViewController(viewTweetViewController: self, didReplyTweets: replyTweets)
+        _ = self.navigationController?.popViewController(animated: true)
+        
+        if (self.navigationController?.topViewController is TweetsViewController) {
+            delegate?.viewTweetViewController(viewTweetViewController: self, didReplyTweets: replyTweets)
+            
+            let tweetsViewController = self.navigationController?.topViewController as! TweetsViewController
+            tweetsViewController.shouldRefresh = false
+        }
     }
 
     @IBAction func onRetweet(_ sender: UIButton) {

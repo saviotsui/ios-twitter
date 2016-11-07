@@ -21,8 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser != nil {
             print("Current User: \(User.currentUser!.name!)")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tweetsNavigationViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
-            window?.rootViewController = tweetsNavigationViewController
+            let hamburgerViewController = storyboard.instantiateViewController(withIdentifier: "HamburgerMenuViewController") as! HamburgerMenuViewController
+            let menuViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+            let tweetsNavigationController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+            
+            hamburgerViewController.menuViewController = menuViewController
+            hamburgerViewController.contentViewController = tweetsNavigationController
+            menuViewController.hamburgerViewController = hamburgerViewController
+            
+            window?.rootViewController = hamburgerViewController
         }
         else {
             print("No Current User")
@@ -36,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController = initialViewController
                 }, completion: nil)
         }
-
+        
         return true
     }
 

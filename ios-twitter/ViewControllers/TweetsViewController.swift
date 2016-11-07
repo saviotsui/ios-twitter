@@ -14,27 +14,22 @@ class TweetsViewController: UIViewController {
 
     @IBOutlet weak var tweetTableView: UITableView!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
-    @IBOutlet weak var profileButton: UIBarButtonItem!
     @IBOutlet weak var newTweetButton: UIBarButtonItem!
+    @IBOutlet weak var hamburgerMenuButton: UIBarButtonItem!
 
     fileprivate var tweets = [Tweet]()
     
     fileprivate var viewTweetController: UIViewController!
     fileprivate var profileViewController: UIViewController!
 
-    fileprivate var firstLoad = true
+    var shouldRefresh = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if (!firstLoad) {
-            firstLoad = false
-            return
-        }
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.hamburgerMenuButton.icon(from: .FontAwesome, code: "bars", ofSize: 20)
         self.logoutButton.icon(from: .FontAwesome, code: "sign-out", ofSize: 20)
-        self.profileButton.icon(from: .FontAwesome, code: "twitter", ofSize: 20)
         self.newTweetButton.icon(from: .FontAwesome, code: "plus", ofSize: 20)
 
         self.tweetTableView.delegate = self
@@ -46,7 +41,9 @@ class TweetsViewController: UIViewController {
         viewTweetController = storyboard.instantiateViewController(withIdentifier: "ViewTweetViewController")
         profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
 
-        refreshTweets()
+        if shouldRefresh {
+            refreshTweets()
+        }
 
         // Initialize a UIRefreshControl
         let refreshControl = UIRefreshControl()
@@ -80,6 +77,9 @@ class TweetsViewController: UIViewController {
 
     @IBAction func onLogout(_ sender: UIBarButtonItem) {
         TwitterClient.instance.logout()
+    }
+    
+    @IBAction func onHamburgerMenu(_ sender: UIBarButtonItem) {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,7 +147,9 @@ extension TweetsViewController: ViewTweetViewControllerDelegate {
 
 extension TweetsViewController: TweetCellDelegate {
     func tweetCell(tweetCell: TweetCell, didTapProfile user: User) {
-        (profileViewController as! ProfileViewController).user = user
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let profileViewController1 = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        profileViewController1.user = user
+        self.navigationController?.pushViewController(profileViewController1, animated: true)
     }
 }

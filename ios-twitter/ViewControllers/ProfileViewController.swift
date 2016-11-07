@@ -12,6 +12,8 @@ import SwiftIconFont
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var hamburgerMenuButton: UIBarButtonItem!
+    
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
 
@@ -31,6 +33,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.hamburgerMenuButton.icon(from: .FontAwesome, code: "bars", ofSize: 20)
 
         self.tweetTable.delegate = self
         self.tweetTable.dataSource = self
@@ -38,6 +41,7 @@ class ProfileViewController: UIViewController {
         self.tweetTable.rowHeight = UITableViewAutomaticDimension
 
         self.backgroundImageView.setImageWith(user.profileBackgroundUrl!)
+        self.backgroundImageView.clipsToBounds = true
         self.profileImageView.setImageWith(user.profileUrl!)
         self.profileImageView.layer.cornerRadius = 4
         self.profileImageView.clipsToBounds = true
@@ -61,6 +65,12 @@ class ProfileViewController: UIViewController {
 
     @IBAction func onBackButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
+        
+        if (self.navigationController?.topViewController is TweetsViewController) {
+            let tweetsViewController = self.navigationController?.topViewController as! TweetsViewController
+            tweetsViewController.shouldRefresh = false
+        }
     }
     
     func refreshTweets(refreshControl: UIRefreshControl? = nil) {
