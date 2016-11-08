@@ -163,9 +163,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TJL-CZ-KYz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TJL-CZ-KYz">
+                                <rect key="frame" x="0.0" y="45" width="375" height="622"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -200,6 +199,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xIG-LT-tIa" firstAttribute="top" secondItem="TJL-CZ-KYz" secondAttribute="bottom" id="MBF-Rf-lQg"/>
+                            <constraint firstItem="TJL-CZ-KYz" firstAttribute="leading" secondItem="n57-hL-NeD" secondAttribute="leading" id="MVT-nD-uv5"/>
+                            <constraint firstItem="TJL-CZ-KYz" firstAttribute="top" secondItem="IVt-g5-dWS" secondAttribute="bottom" constant="25" id="X5T-3K-jY6"/>
+                            <constraint firstAttribute="trailing" secondItem="TJL-CZ-KYz" secondAttribute="trailing" id="t24-eR-4at"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qe4-JR-Z3I"/>
                     <connections>
@@ -910,7 +915,7 @@
         <image name="twitter-circle-transparent.png" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bER-Yi-zAM"/>
+        <segue reference="rku-ia-ZHt"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
