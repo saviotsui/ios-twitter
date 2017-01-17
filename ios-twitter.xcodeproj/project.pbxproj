@@ -29,6 +29,11 @@
 		A89DBC5F1DC72D4C002221AF /* ViewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89DBC5E1DC72D4C002221AF /* ViewTweetViewController.swift */; };
 		A8DBAC941DC856760073F5D8 /* CreateTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DBAC931DC856760073F5D8 /* CreateTweet.swift */; };
 		A8DCAD3C1DC5917C00AA95A7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DCAD3B1DC5917C00AA95A7 /* LoginViewController.swift */; };
+		B23640AC1DCFE077004FF927 /* TweetCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23640AB1DCFE077004FF927 /* TweetCellDelegate.swift */; };
+		B23640AE1DCFE88D004FF927 /* HamburgerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23640AD1DCFE88D004FF927 /* HamburgerMenuViewController.swift */; };
+		B2C3E5B81DCFEE08002E425D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3E5B71DCFEE08002E425D /* MenuViewController.swift */; };
+		B2C3E5BE1DCFEEC2002E425D /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3E5BD1DCFEEC2002E425D /* MenuCell.swift */; };
+		B2C3E5C41DD03BDD002E425D /* ViewsTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3E5C31DD03BDD002E425D /* ViewsTweets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +63,11 @@
 		A89DBC5E1DC72D4C002221AF /* ViewTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewTweetViewController.swift; path = ViewControllers/ViewTweetViewController.swift; sourceTree = "<group>"; };
 		A8DBAC931DC856760073F5D8 /* CreateTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateTweet.swift; path = Models/CreateTweet.swift; sourceTree = "<group>"; };
 		A8DCAD3B1DC5917C00AA95A7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ViewControllers/LoginViewController.swift; sourceTree = "<group>"; };
+		B23640AB1DCFE077004FF927 /* TweetCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetCellDelegate.swift; path = Protocols/TweetCellDelegate.swift; sourceTree = "<group>"; };
+		B23640AD1DCFE88D004FF927 /* HamburgerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HamburgerMenuViewController.swift; path = ViewControllers/HamburgerMenuViewController.swift; sourceTree = "<group>"; };
+		B2C3E5B71DCFEE08002E425D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = ViewControllers/MenuViewController.swift; sourceTree = "<group>"; };
+		B2C3E5BD1DCFEEC2002E425D /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuCell.swift; path = Views/MenuCell.swift; sourceTree = "<group>"; };
+		B2C3E5C31DD03BDD002E425D /* ViewsTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewsTweets.swift; path = Models/ViewsTweets.swift; sourceTree = "<group>"; };
 		FEBEEB286062C5664951CF8E /* Pods-ios-twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-twitter/Pods-ios-twitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +146,8 @@
 				A89DBC5A1DC7184E002221AF /* ProfileViewController.swift */,
 				A89DBC5C1DC71984002221AF /* CreateTweetViewController.swift */,
 				A89DBC5E1DC72D4C002221AF /* ViewTweetViewController.swift */,
+				B23640AD1DCFE88D004FF927 /* HamburgerMenuViewController.swift */,
+				B2C3E5B71DCFEE08002E425D /* MenuViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -146,6 +158,7 @@
 				A87DD2111DC6A28D00F5B944 /* User.swift */,
 				A87DD2131DC6A2A400F5B944 /* Tweet.swift */,
 				A8DBAC931DC856760073F5D8 /* CreateTweet.swift */,
+				B2C3E5C31DD03BDD002E425D /* ViewsTweets.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -155,6 +168,7 @@
 			children = (
 				A864E98D1DC86176008EF23F /* CreateTweetViewControllerDelegate.swift */,
 				A864E98F1DC86803008EF23F /* ViewTweetViewControllerDelegate.swift */,
+				B23640AB1DCFE077004FF927 /* TweetCellDelegate.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -163,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				A82222EF1DC6CCDA009916E6 /* TweetCell.swift */,
+				B2C3E5BD1DCFEEC2002E425D /* MenuCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -324,13 +339,18 @@
 			files = (
 				A87DD2121DC6A28D00F5B944 /* User.swift in Sources */,
 				A8DBAC941DC856760073F5D8 /* CreateTweet.swift in Sources */,
+				B2C3E5C41DD03BDD002E425D /* ViewsTweets.swift in Sources */,
+				B2C3E5BE1DCFEEC2002E425D /* MenuCell.swift in Sources */,
 				A82222F01DC6CCDA009916E6 /* TweetCell.swift in Sources */,
 				A87DD2141DC6A2A400F5B944 /* Tweet.swift in Sources */,
+				B23640AC1DCFE077004FF927 /* TweetCellDelegate.swift in Sources */,
 				A82222EE1DC6CC66009916E6 /* TweetsViewController.swift in Sources */,
 				A8DCAD3C1DC5917C00AA95A7 /* LoginViewController.swift in Sources */,
+				B23640AE1DCFE88D004FF927 /* HamburgerMenuViewController.swift in Sources */,
 				A89DBC5F1DC72D4C002221AF /* ViewTweetViewController.swift in Sources */,
 				A864E98E1DC86176008EF23F /* CreateTweetViewControllerDelegate.swift in Sources */,
 				A864E9901DC86803008EF23F /* ViewTweetViewControllerDelegate.swift in Sources */,
+				B2C3E5B81DCFEE08002E425D /* MenuViewController.swift in Sources */,
 				A87DD2161DC6B55B00F5B944 /* TwitterClient.swift in Sources */,
 				A89DBC5D1DC71984002221AF /* CreateTweetViewController.swift in Sources */,
 				A89DBC5B1DC7184E002221AF /* ProfileViewController.swift in Sources */,

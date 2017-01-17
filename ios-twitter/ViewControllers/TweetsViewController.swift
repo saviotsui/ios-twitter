@@ -13,26 +13,31 @@ import SwiftIconFont
 class TweetsViewController: UIViewController {
 
     @IBOutlet weak var tweetTableView: UITableView!
-    @IBOutlet weak var logoutButton: UIBarButtonItem!
-    @IBOutlet weak var profileButton: UIBarButtonItem!
     @IBOutlet weak var newTweetButton: UIBarButtonItem!
+    @IBOutlet weak var hamburgerMenuButton: UIBarButtonItem!
 
     fileprivate var tweets = [Tweet]()
-
+    
+    var viewTweets: ViewTweets!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        viewTweets = viewTweets ?? ViewTweets(shouldRefresh: true, timelineTitle: "Timeline")
+        
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.logoutButton.icon(from: .FontAwesome, code: "sign-out", ofSize: 20)
-        self.profileButton.icon(from: .FontAwesome, code: "twitter", ofSize: 20)
+        self.navigationItem.title = viewTweets.timelineTitle
+        self.hamburgerMenuButton.icon(from: .FontAwesome, code: "bars", ofSize: 20)
         self.newTweetButton.icon(from: .FontAwesome, code: "plus", ofSize: 20)
 
         self.tweetTableView.delegate = self
         self.tweetTableView.dataSource = self
         self.tweetTableView.estimatedRowHeight = 150
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
-
-        refreshTweets()
+        
+        if viewTweets.shouldRefresh {
+            refreshTweets()
+        }
 
         // Initialize a UIRefreshControl
         let refreshControl = UIRefreshControl()
@@ -46,44 +51,53 @@ class TweetsViewController: UIViewController {
     }
 
     func refreshTweets(refreshControl: UIRefreshControl? = nil) {
-        TwitterClient.instance.homeTimeline(success: { (tweets) in
-            self.tweets = tweets
-            self.tweetTableView.reloadData()
+        
+        if (viewTweets.timelineTitle == "Timeline") {
+            TwitterClient.instance.homeTimeline(success: { (tweets) in
+                self.tweets = tweets
+                self.tweetTableView.reloadData()
 
-            print("In HomeTimeline")
-            for tweet in tweets {
-                print(tweet.text!)
-                print(tweet.user!.name!)
-            }
-            refreshControl?.endRefreshing()
-            }, failure: { (error) in
-                print("In HomeTimeline Error")
-                print(error!.localizedDescription)
-
+                print("In HomeTimeline")
+                for tweet in tweets {
+                    print(tweet.text!)
+                    print(tweet.user!.name!)
+                }
                 refreshControl?.endRefreshing()
-        })
+                }, failure: { (error) in
+                    print("In HomeTimeline Error")
+                    print(error!.localizedDescription)
+
+                    refreshControl?.endRefreshing()
+            })
+        }
+        else {
+            TwitterClient.instance.mentionsTimeline(success: { (tweets) in
+                self.tweets = tweets
+                self.tweetTableView.reloadData()
+                
+                print("In MentionsTimeline")
+                for tweet in tweets {
+                    print(tweet.text!)
+                    print(tweet.user!.name!)
+                }
+                refreshControl?.endRefreshing()
+            }, failure: { (error) in
+                print("In MentionsTimeline Error")
+                print(error!.localizedDescription)
+                
+                refreshControl?.endRefreshing()
+            })
+        }
     }
 
-    @IBAction func onLogout(_ sender: UIBarButtonItem) {
-        TwitterClient.instance.logout()
+    @IBAction func onHamburgerButton(_ sender: UIBarButtonItem) {
+        
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let navigationController = segue.destination as! UINavigationController
 
-        if (navigationController.topViewController is ProfileViewController) {
-            let profileViewController = navigationController.topViewController as! ProfileViewController
-            profileViewController.user = User.currentUser
-        }
-        else if (navigationController.topViewController is ViewTweetViewController) {
-            let viewTweetViewController = navigationController.topViewController as! ViewTweetViewController
-            let indexPath = tweetTableView.indexPath(for: sender as! TweetCell)
-            let data = tweets[(indexPath?.row)!]
-
-            viewTweetViewController.tweet = data
-            viewTweetViewController.delegate = self
-        }
-        else if (navigationController.topViewController is CreateTweetViewController) {
+        if (navigationController.topViewController is CreateTweetViewController) {
             let createTweetViewController = navigationController.topViewController as! CreateTweetViewController
 
             let createTweet = CreateTweet(viewTitle: "Create a Tweet")
@@ -96,6 +110,11 @@ class TweetsViewController: UIViewController {
 extension TweetsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewTweetController = storyboard.instantiateViewController(withIdentifier: "ViewTweetViewController") as! ViewTweetViewController
+        viewTweetController.tweet = tweets[indexPath.row]
+        viewTweetController.delegate = self
+        self.navigationController?.pushViewController(viewTweetController, animated: true)
     }
 }
 
@@ -107,6 +126,7 @@ extension TweetsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "com.ios-twitter.TweetCell", for: indexPath) as! TweetCell
         cell.tweet = tweets[indexPath.row]
+        cell.delegate = self
         return cell
     }
 }
@@ -124,5 +144,14 @@ extension TweetsViewController: ViewTweetViewControllerDelegate {
             self.tweets.insert(tweet, at: 0)
         }
         self.tweetTableView.reloadData()
+    }
+}
+
+extension TweetsViewController: TweetCellDelegate {
+    func tweetCell(tweetCell: TweetCell, didTapProfile user: User) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let profileViewController1 = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        profileViewController1.user = user
+        self.navigationController?.pushViewController(profileViewController1, animated: true)
     }
 }

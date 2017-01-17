@@ -12,6 +12,8 @@ import SwiftIconFont
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var hamburgerMenuButton: UIBarButtonItem!
+    
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
 
@@ -25,12 +27,22 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var tweetTable: UITableView!
     
     var user: User!
+    var isUserFromHamburger: Bool = false
+    
     fileprivate var tweets = [Tweet]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.hamburgerMenuButton.icon(from: .FontAwesome, code: "bars", ofSize: 20)
+        
+        if (isUserFromHamburger) {
+            self.backButton.isEnabled = false
+        }
+        else {
+            self.backButton.isEnabled = true
+        }
 
         self.tweetTable.delegate = self
         self.tweetTable.dataSource = self
@@ -38,6 +50,7 @@ class ProfileViewController: UIViewController {
         self.tweetTable.rowHeight = UITableViewAutomaticDimension
 
         self.backgroundImageView.setImageWith(user.profileBackgroundUrl!)
+        self.backgroundImageView.clipsToBounds = true
         self.profileImageView.setImageWith(user.profileUrl!)
         self.profileImageView.layer.cornerRadius = 4
         self.profileImageView.clipsToBounds = true
@@ -48,7 +61,7 @@ class ProfileViewController: UIViewController {
         self.tweetsLabel.text = String.fontAwesomeIcon("twitter-square")! + " " + String(describing: user.statusesCount!)
         self.followersLabel.font = UIFont.icon(from: .FontAwesome, ofSize: 12)
         self.followersLabel.text = String.fontAwesomeIcon("users")! + " " + String(describing: user.followersCount!)
-        self.screenNameLabel.text = user.screenName
+        self.screenNameLabel.text = String("@\(user!.screenName!)")
         self.nameLabel.text = user.name
 
         refreshTweets()
@@ -59,8 +72,19 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func onHamburgerButton(_ sender: UIBarButtonItem) {
+    }
+    
     @IBAction func onBackButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
+        
+        if (self.navigationController?.topViewController is TweetsViewController) {
+            let tweetsViewController = self.navigationController?.topViewController as! TweetsViewController
+            
+            let viewTweetData = ViewTweets(shouldRefresh: false, timelineTitle: "Timeline")
+            tweetsViewController.viewTweets = viewTweetData
+        }
     }
     
     func refreshTweets(refreshControl: UIRefreshControl? = nil) {
